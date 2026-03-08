@@ -1,28 +1,27 @@
-import { Check } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const plans = [
   {
-    name: "Личный",
+    name: "Свободный доступ",
     price: "Бесплатно",
-    description: "Для тех, кто начинает путь осознанной продуктивности",
-    features: ["Неспешное управление задачами", "Ежедневная сессия фокуса", "Еженедельные размышления", "Доступ в приложении"],
-    cta: "Начать бесплатно",
+    description: "Для тех, кто только открывает журнал для себя",
+    features: ["Все открытые записи", "Новые публикации на почту", "Возможность оставить отклик"],
+    cta: "Читать бесплатно",
     highlighted: false,
   },
   {
-    name: "Профи",
-    price: "990 ₽",
+    name: "Близкий читатель",
+    price: "390 ₽",
     period: "/мес",
-    description: "Для тех, кто готов углубить практику",
+    description: "Для тех, кто хочет быть ближе и читать всё",
     features: [
-      "Всё из тарифа Личный",
-      "Безлимитные сессии фокуса",
-      "Расписание часов тишины",
-      "Мягкая аналитика",
-      "Синхронизация с календарём",
-      "Приоритетная поддержка",
+      "Все открытые записи",
+      "Закрытые записи и дневники",
+      "Личные истории без фильтров",
+      "Ранний доступ к новым текстам",
+      "Ответ на ваше сообщение лично",
     ],
-    cta: "Начать путь",
+    cta: "Стать близким читателем",
     highlighted: true,
   },
 ];
@@ -32,11 +31,11 @@ export function Pricing() {
     <section id="pricing" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
-          <span className="text-sm uppercase tracking-widest text-amber mb-4 block">Тарифы</span>
+          <span className="text-sm uppercase tracking-widest text-amber mb-4 block">Подписка</span>
           <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-foreground mb-4 text-balance">
-            Простые и честные цены
+            Читайте так, как вам близко
           </h2>
-          <p className="text-muted-foreground text-lg">Без скрытых платежей. Отмена в любой момент.</p>
+          <p className="text-muted-foreground text-lg">Без обязательств. Отмена в любой момент.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -58,15 +57,19 @@ export function Pricing() {
                   </span>
                 )}
               </div>
-              <p className={`mb-8 ${plan.highlighted ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+              <p className={`text-sm mb-8 leading-relaxed ${plan.highlighted ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
                 {plan.description}
               </p>
 
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <Check size={18} className="text-sage" />
-                    <span className={plan.highlighted ? "text-primary-foreground/90" : "text-foreground"}>
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      plan.highlighted ? "bg-primary-foreground/20" : "bg-sage/10"
+                    }`}>
+                      <Icon name="Check" size={12} className={plan.highlighted ? "text-primary-foreground" : "text-sage"} />
+                    </div>
+                    <span className={`text-sm ${plan.highlighted ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
                       {feature}
                     </span>
                   </li>
@@ -75,8 +78,10 @@ export function Pricing() {
 
               <a
                 href="#contact"
-                className={`block w-full py-3.5 rounded-full text-center transition-opacity duration-300 hover:opacity-90 ${
-                  plan.highlighted ? "bg-primary-foreground text-primary" : "bg-primary text-primary-foreground"
+                className={`block text-center py-3.5 px-6 rounded-full text-sm transition-all duration-300 ${
+                  plan.highlighted
+                    ? "bg-primary-foreground text-primary hover:opacity-90"
+                    : "border border-border text-foreground hover:bg-muted"
                 }`}
               >
                 {plan.cta}
